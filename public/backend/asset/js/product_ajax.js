@@ -23,6 +23,7 @@ $('#file').on('change',()=>{
     })
 //THÊM ẢNH SẢN PHẨM 
 $('#files').on('change',()=>{
+    //check file 
     var formData = new FormData()
     var files = $('#files')[0].files
     for (let index = 0; index < files.length; index++) {
@@ -50,3 +51,6 @@ $('#files').on('change',()=>{
         }
     })
 })
+
+
+

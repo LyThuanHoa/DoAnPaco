@@ -262,7 +262,7 @@ li{
 /*----product_list----*/
 .admin-content-main-content-product-list{
     max-height: 575px;
-    overflow: scroll;
+    /* overflow: scroll; */
 }
 .admin-content-main-content-product-list table{
     width: 100%;

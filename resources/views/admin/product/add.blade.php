@@ -11,8 +11,8 @@
                                     <input type="text" name="price_normal" placeholder="Giá bán">
                                     <input type="text" name="price_sale" placeholder="Giá giảm">
                                 </div>
-                                <textarea class="editor_des" name="description" id="" placeholder="Điểm nổi bật"></textarea>
-                                <textarea class="editor_content" name="content" id="" placeholder="Mô tả sản phẩm"></textarea>
+                                <textarea class="editor1" name="description" id="" placeholder="Điểm nổi bật"></textarea>
+                                <textarea class="editor2" name="content" id="" placeholder="Mô tả sản phẩm"></textarea>
                                 <button class="main-btn" type="submit">Thêm Sản Phẩm</button>
                             </div>
                             <div class="admin-content-main-content-right">

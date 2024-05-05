@@ -25,6 +25,6 @@ function handleSampleError( error ) {
 		`Please, report the following error on ${ issueUrl } with the build id "yc7pcye9rij2-9g86rpqs002r" and the error stack trace:`
 	].join( '\n' );
 
-	console.error( message );
-	console.error( error );
+	// console.error( message );
+	// console.error( error );
 }

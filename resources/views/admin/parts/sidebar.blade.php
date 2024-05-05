@@ -22,9 +22,24 @@
                         <li><a href=""><i class="ri-menu-line"></i> Sản phẩm</i></a>
                             <ul class="sub-menu">
                                 <div class="sub-menu-item">
-                                    <li><a href="/admin/product_list"><i class="ri-arrow-drop-right-line"></i>Danh sách</a></li>
-                                    <li><a href="/admin/product_add"><i class="ri-arrow-drop-right-line"></i>Thêm mới</a></li>
+                                    <li><a href="/admin/product/list"><i class="ri-arrow-drop-right-line"></i>Danh sách</a></li>
+                                    <li><a href="/admin/product/create"><i class="ri-arrow-drop-right-line"></i>Thêm mới</a></li>
                                 </div>
                             </ul>
-                        <li><a href=""><i class="ri-calendar-check-line"></i> Đặt lịch làm gốm</a></li>
+                        <li><a href=""><i class="ri-calendar-check-line"></i> Đặt lịch làm gốm</a>
+                            <ul class="sub-menu">
+                                <div class="sub-menu-item">
+                                    <li><a href=""><i class="ri-arrow-drop-right-line"></i>Danh sách</a></li>
+                                    <li><a href=""><i class="ri-arrow-drop-right-line"></i>Thêm mới</a></li>
+                                </div>
+                            </ul>
+                        </li>
+                        <li><a href=""><i class="ri-calendar-check-line"></i> Slider</a>
+                            <ul class="sub-menu">
+                                <div class="sub-menu-item">
+                                    <li><a href=""><i class="ri-arrow-drop-right-line"></i>Danh sách</a></li>
+                                    <li><a href=""><i class="ri-arrow-drop-right-line"></i>Thêm mới</a></li>
+                                </div>
+                            </ul>
+                        </li>
 </div>
