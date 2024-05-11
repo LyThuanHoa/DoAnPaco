@@ -1,12 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Mail\TestMail;
+use Illuminate\Support\Facades\Mail;
 use App\Models\product;
 use App\Models\order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 use function Laravel\Prompts\alert;
 
@@ -70,6 +75,7 @@ class FrontendController extends Controller
         return redirect('/cart');
     }
     public function send_cart(Request $request){
+        
         $token = Str::random(12);
         $order = new order;
         $order -> name = $request -> input('name');
@@ -82,8 +88,24 @@ class FrontendController extends Controller
         $order -> note = $request -> input('note');
         $order_detail = json_encode($request -> input('product_id'));
         $order -> order_detail = $order_detail;
-        $order -> token = $request -> $token;
+        $order -> token = $token;
         $order -> save();
+        $mailIfor = $order -> email;
+        $nameIfor = $order -> name;
+        $Mail = Mail::to($mailIfor) -> send(new TestMail($nameIfor));
         return redirect('/order/confirm');
     }
+    public function show_login(){
+        return view('login');
+    }
+    // public function check_login(Request $request){
+    //     if(Auth::attempt(
+    //         ['email' => $request -> input('email'),
+    //         'password'=> $request -> input('password')
+    //         ]
+    //     ))
+    //         return redirect('admin');
+        
+    //         return redirect()-> back();
+    // }
 }

@@ -14,31 +14,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td><img width="150px" src="{{asset('backend/asset/images/product2.jpg')}}" alt=""></td>
-                                        <td>Set cổ điển</td>
-                                        <td>500,000</td>
-                                        <td>1</td>
-                                        <td>500,000</td>
-                                        <td>
-                                            <a class="delete-class" href="">Xóa</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td><img width="150px" src="{{asset('backend/asset/images/product1.3.jpg')}}" alt=""></td>
-                                        <td>Set hoa mặt trời</td>
-                                        <td>400,000</td>
-                                        <td>1</td>
-                                        <td>400,000</td>
-                                        <td>
-                                            <a class="delete-class" href="">Xóa</a>
-                                        </td>
-                                    </tr>
+                                    @php
+                                        $total = 0;
+                                    @endphp
+                                    @foreach($products as $product)
+                                        @php
+                                            $price = $product -> price_sale * $order_detail[$product -> id];
+                                            $total += $price;
+                                        @endphp
+                                        <tr>
+                                            <td>{{$product -> id}}</td>
+                                            <td><img width="150px" src="{{asset($product -> image)}}" alt=""></td>
+                                            <td>{{$product -> name}}</td>
+                                            <td>{{number_format($product -> price_sale)}}</td>
+                                            <td>{{$order_detail[$product -> id]}}</td>
+                                            <td>{{number_format($price)}}</td>
+                                            <td>
+                                                <a class="delete-class" href="">Xóa</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     <tr>
                                         <td colspan="5" style="font-weight: bold;">Tổng Cộng</td>
-                                        <td style="font-weight: bold;">900,000</td>
+                                        <td style="font-weight: bold;">{{number_format($total)}}</td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -7,10 +7,21 @@ use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 use App\Models\product;
 use App\Models\order;
+
+//Login
+//Route::get('/login',[FrontendController::class,'show_login'])-> name('login');
+//Route::post('/check_login',[ProductController::class,'check_login']);
 //Admin
-Route::get('/admin', function () {
-    return view('admin.home');
-});
+// Route::middleware('auth') -> group(function(){
+//     Route::prefix('admin') -> group(function(){
+//         Route::get('/',function() {return view('admin.home');});
+//         Route::get('product/list',[ProductController::class,'list_product']);
+//     });
+// });
+
+
+
+Route::get('/admin',function() {return view('admin.home');});
 
 //Product
 Route::post('/admin/product/add',[ProductController::class,'insert_product']);
@@ -22,10 +33,7 @@ Route::post('/admin/product/edit/{id}',[ProductController::class,'update_product
 
 //order 
 Route::get('/admin/order/list',[OrderController::class,'list_order']);
-
-Route::get('/admin/order_detail', function () {
-    return view('admin.order_detail');
-});
+Route::get('/admin/order/detail/{order_detail}',[OrderController::class,'detail_order']);
 //upload
 Route::post('/upload',[UploadController::class,'uploadImage']);
 Route::post('/uploads',[UploadController::class,'uploadImages']);

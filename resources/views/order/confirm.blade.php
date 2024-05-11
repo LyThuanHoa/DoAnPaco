@@ -11,7 +11,8 @@
                     Vui lòng check <span style="font-style: italic;font-weight: bold;">Email</span> Đã đăng ký để nhận và xác nhận Đơn hàng</p>
                 </div>
             </div>
-            <button class="main-btn">Tiếp tục mua hàng</button>
+            <a href="/"><button class="main-btn">Tiếp tục mua hàng</button></a>
+            
         </div>
     </section>
 @endsection
