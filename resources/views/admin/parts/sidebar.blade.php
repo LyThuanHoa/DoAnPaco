@@ -14,7 +14,7 @@
                         <li><a href=""><i class="ri-file-list-3-line"></i> Đơn hàng</i></a>
                             <ul class="sub-menu">
                                 <div class="sub-menu-item">
-                                    <li><a href="/admin/order_list"><i class="ri-arrow-drop-right-line"></i>Danh sách</a></li>
+                                    <li><a href="/admin/order/list"><i class="ri-arrow-drop-right-line"></i>Danh sách</a></li>
                                     <li><a href=""><i class="ri-arrow-drop-right-line"></i>Thêm</a></li>
                                 </div>
                             </ul>

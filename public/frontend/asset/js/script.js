@@ -63,21 +63,30 @@ for(let index = 0; index < imageSmall.length; index++){
 }
 
 //Quantity product
-const quantityMinus = document.querySelector('.ri-checkbox-indeterminate-fill')
-const quantityPlus = document.querySelector('.ri-add-box-fill')
-const quantityInput = document.querySelector('.quantity-input')
-let q = 1
-if(quantityMinus!= null && quantityPlus!= null){
-    quantityPlus.addEventListener('click',()=>{
-        q++
-        quantityInput.value = q
-    })
-    quantityMinus.addEventListener('click',()=>{
-        if(q <= 1){
-            return false
-        }else{
-            q--
-            quantityInput.value = q
-        }
-    })
+const quantityMinus = document.querySelectorAll('.ri-checkbox-indeterminate-fill')
+const quantityPlus = document.querySelectorAll('.ri-add-box-fill')
+const quantityInput = document.querySelectorAll('.quantity-input')
+
+if(quantityMinus!= null && quantityPlus!= null)
+{
+
+    for (let index = 0; index < quantityPlus.length; index++) {
+
+        quantityPlus[index].addEventListener('click',()=>{
+            inputValue = quantityInput[index].value
+                inputValue++
+                quantityInput[index].value = inputValue
+                console.log(quantityInput[index].value)
+        })
+        quantityMinus[index].addEventListener('click',()=>{
+            inputValue = quantityInput[index].value
+            if(inputValue <= 1){
+                return false
+            }else{
+                inputValue--
+                quantityInput[index].value = inputValue
+            }
+        })
+    }
 }
+

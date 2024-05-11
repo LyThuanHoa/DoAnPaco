@@ -313,3 +313,13 @@ li{
     width: 120px;
     margin-right: 8px;
 }
+#input-file-img img{
+    width: 70px;
+    margin-right:10px;
+}
+.ck.ck-editor__main ul{
+    padding-left: 50px;
+}
+.ck.ck-editor__main li{
+    list-style: unset;
+}
