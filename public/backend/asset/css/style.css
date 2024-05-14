@@ -1,0 +1,325 @@
+:root{
+    --main-bg-color:#FFF7F3;
+    --sub-bg-color:#f2f7fb;
+    --top-height:75px;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+a{
+    text-decoration: none;
+    color: unset;
+}
+li{
+    list-style: none;
+}
+.row-grid{
+    display: grid;
+    justify-content: space-between;
+}
+/*----Main----*/
+.admin .row-grid {
+    grid-template-columns: 20% 80%;
+}
+
+
+
+
+/*----sidebar----*/
+.admin-sidebar{
+    height: 100vh;
+    background-color: var(--main-bg-color);
+}
+.admin-sidebar-top{
+    text-align: center;
+    height: var(--top-height);
+    border-bottom: 1px solid grey;
+}
+.admin-sidebar-top img{
+    width: 220px;
+}
+.admin-sidebar-content ul li a i{
+    margin-right: 5px;
+    font-size: 20px;
+}
+.admin-sidebar-content{
+    padding: 30px 0 0 30px;
+    color: brown;
+}
+.admin-sidebar-content ul li{
+    padding: 6px;
+    transition: all 0.3s ease;
+}
+.admin-sidebar-content ul li:hover{
+    background-color: rgba(255, 228, 196, 0.873);
+}
+.sub-menu{
+    height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+.flex-box{
+    display: flex;
+    height: 75px;
+    align-items: center;
+}
+.main-btn{
+    padding: 6px 12px;
+    background-color: brown;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.delete-class,.non-confirm-order{
+    padding: 3px;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+}
+.edit-class, .confirm-order{
+    padding: 3px;
+    background-color:green;
+    color: white;
+    border-radius: 5px;
+}
+/* .sub-menu.active{
+    height: 70px;
+} */
+.sub-menu li:hover a{
+    color: olive;
+}
+/*---content---*/
+.admin-content{
+    background-color: #f2f7fb ;
+}
+.admin-content-top{
+    display: flex;
+    justify-content: space-between;
+    height: var(--top-height);
+    border-bottom: 1px solid grey;
+    padding: 0 12px;
+}
+.admin-content-top i{
+    margin-left: 12px;
+}
+.admin-content-top-left ul li i, .admin-content-top-right ul li i{
+    font-size: 20px;
+    cursor: pointer;
+}
+.admin-content-top-center{
+    display: flex;
+    align-items: center;
+    height: 75px;
+}
+.admin-content-top-right ul li:last-child p{
+    cursor: pointer;
+}
+.hiAdmin{
+    font-size: 18px;
+    font-style: italic;
+    color: rgb(143, 26, 26);
+}
+.admin-content-top-right ul li:first-child p{
+    cursor: pointer;
+}
+.admin-content-top-right ul li:first-child i{
+    position: relative;
+}
+.admin-content-top-right ul li:first-child i::after{
+    position: absolute;
+    content: attr(number);
+    height: 18px;
+    width: 18px;
+    display: block;
+    background-color: orange;
+    border-radius: 50%;
+    top: -12px;
+    right: -12px;
+    color: black;
+    font-size: small;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    animation:notifi ;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+.admin-content-top-right ul li:nth-child(2) i{
+    position: relative;
+}
+.admin-content-top-right ul li:nth-child(2) i::after{
+    position: absolute;
+    content: attr(number);
+    height: 18px;
+    width: 18px;
+    display: block;
+    background-color: rgb(35, 170, 238);
+    border-radius: 50%;
+    top: -12px;
+    right: -12px;
+    color: black;
+    font-size: small;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    animation:notifi ;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+@keyframes notifi {
+    0% {
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.admin-content-main-title h2{
+    padding: 12px;
+    font-weight: 500;
+    position: relative;
+}
+.admin-content-main-title h2::after{
+    position: absolute;
+    display: block;
+    content: "";
+    height: 3px;
+    width: 80px;
+    background-color: grey;
+    bottom: 6px;
+    left: 12px;
+    border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.admin-content-main-content{
+    background-color: white;
+}
+
+/*---product-add---*/
+.admin-content-main-content-product-add{
+    display: grid;
+    grid-template-columns: 70% 30%;
+    padding: 12px;
+    column-gap: 20px;
+}
+.admin-content-main-content-left input{
+    height: 35px;
+    border: none;
+    background-color: whitesmoke;
+    margin-bottom: 12px;
+    outline: none;
+    border-radius: 5px;
+    padding-left: 8px;
+}
+.admin-content-main-content-two-input{
+    display: flex;
+    justify-content: space-between;
+}
+.admin-content-main-content-two-input input{
+    width: 49%;
+}
+.admin-content-main-content-left textarea{
+    height: 200px;
+    width: 100%;
+    margin-bottom: 12px;
+    outline: none;
+    padding: 8px;
+    border: none;
+}
+.admin-content-main-content-right-image input{
+    display: none;
+}
+.admin-content-main-content-right-images input{
+    display: none;
+}
+.image-show, .images-show{
+    min-height: 150px;
+}
+.admin-content-main-content-right label{
+    padding: 6px 12px;
+    background-color: rgb(2, 114, 2);
+    color: whitesmoke;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: small;
+}
+/*---ckeditor5-----*/
+.ck.ck-editor {
+    margin-bottom: 12px;
+}
+.admin-content-main-content-left{
+    max-height: 570px;
+    overflow: scroll;
+} 
+
+/*----product_list----*/
+.admin-content-main-content-product-list{
+    max-height: 575px;
+    /* overflow: scroll; */
+}
+.admin-content-main-content-product-list table{
+    width: 100%;
+    padding: 12px 0;
+    border-collapse: collapse;
+}
+.admin-content-main-content-product-list table,th,td{
+    text-align: center;
+}
+.admin-content-main-content-product-list table th{
+    background-color: brown;
+    color: whitesmoke;
+    padding: 6px 0;
+}
+/*----order-list----*/
+/* .admin-content-main-content-order-list{
+     max-height: 575px;
+    overflow: scroll; 
+} */
+.admin-content-main-content-order-list table{
+    width: 100%;
+    padding: 12px 0;
+    border-collapse: collapse;
+}
+.admin-content-main-content-order-list table a{
+    display: inline-block;
+}
+.admin-content-main-content-order-list table,th,td{
+    text-align: center;
+}
+.admin-content-main-content-order-list table th{
+    background-color: brown;
+    color: whitesmoke;
+    padding: 6px 0;
+}
+.admin-content-main-content-order-list table td{
+    padding: 6px 0;
+}
+
+/*========Bổ sung khi làm backend========*/
+#input-file-img, #input-file-imgs{
+    padding: 12px 0;
+}
+#input-file-img img{
+    width: 120px;
+}
+#input-file-imgs img{
+    width: 120px;
+    margin-right: 8px;
+}
+#input-file-img img{
+    width: 70px;
+    margin-right:10px;
+}
+.ck.ck-editor__main ul{
+    padding-left: 50px;
+}
+.ck.ck-editor__main li{
+    list-style: unset;
+}
