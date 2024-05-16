@@ -20,6 +20,24 @@ li{
     display: grid;
     justify-content: space-between;
 }
+.input-admin input{
+    width: 800px;
+    height: 40px;
+    padding: 10px 15px;
+    margin: 15px 20px;
+    background-color: whitesmoke;
+    border: none;
+    border-radius: 5px;
+}
+.select select{
+    width: 400px;
+    height: 35px;
+    margin-bottom: 12px;
+    padding-left: 5px;
+    background-color: whitesmoke;
+    border: none;
+    border-radius: 5px;
+}
 /*----Main----*/
 .admin .row-grid {
     grid-template-columns: 20% 80%;

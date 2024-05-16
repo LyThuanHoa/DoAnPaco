@@ -5,12 +5,14 @@ use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\UploadController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 use App\Models\product;
 use App\Models\order;
 use App\Models\book;
 use App\Models\news;
+use App\Models\category;
 
 //Login
 //Route::get('/login',[FrontendController::class,'show_login'])-> name('login');
@@ -54,16 +56,17 @@ Route::get('/admin/news/list',[NewsController::class,'list_news']);
 Route::get('/admin/news/delete',[NewsController::class,'delete_news']);
 Route::get('/admin/news/edit/{id}',[NewsController::class,'edit_news']);
 Route::post('/admin/news/edit/{id}',[NewsController::class,'update_news']);
+
 //category
-// Route::post('/admin/category/add',[NewsController::class,'insert_category']);
-// Route::get('/admin/category/create',[NewsController::class,'add_category']);
-// Route::get('/admin/category/list',[NewsController::class,'list_category']);
-// Route::get('/admin/category/delete',[NewsController::class,'delete_category']);
-// Route::get('/admin/category/edit/{id}',[NewsController::class,'edit_category']);
-// Route::post('/admin/category/edit/{id}',[NewsController::class,'update_category']);
+Route::post('/admin/category/add',[CategoryController::class,'insert_category']);
+Route::get('/admin/category/create',[CategoryController::class,'add_category']);
+Route::get('/admin/category/list',[CategoryController::class,'list_category']);
+Route::get('/admin/category/delete',[CategoryController::class,'delete_category']);
+Route::get('/admin/category/edit/{id}',[CategoryController::class,'edit_category']);
+Route::post('/admin/category/edit/{id}',[CategoryController::class,'update_category']);
 
 
-
+Route::get('/order/confirm/{token}', [OrderController::class, 'confirmOrder'])->name('order.success');
 
 
 //upload
@@ -80,7 +83,7 @@ Route::post('/cart/add',[FrontendController::class,'add_cart']);
 Route::get('/cart',[FrontendController::class,'show_cart']);
 Route::get('/cart/delete/{id}',[FrontendController::class,'delete_cart']);
 Route::post('/cart/update',[FrontendController::class,'update_cart']);
-Route::post('/cart/send',[FrontendController::class,'send_cart']);
+Route::post('/cart/send',[OrderController::class,'send_cart']);
 //Book
 Route::get('/book/add',[FrontendController::class,'show_book']);
 Route::get('/book/success',[FrontendController::class,'success_book']);

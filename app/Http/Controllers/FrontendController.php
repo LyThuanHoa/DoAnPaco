@@ -76,27 +76,27 @@ class FrontendController extends Controller
         Session::put('cart',$cart);
         return redirect('/cart');
     }
-    public function send_cart(Request $request){
+    // public function send_cart(Request $request){
         
-        $token = Str::random(12);
-        $order = new order;
-        $order -> name = $request -> input('name');
-        $order -> phone = $request -> input('phone');
-        $order -> email = $request -> input('email');
-        $order -> city = $request -> input('city');
-        $order -> district = $request -> input('district');
-        $order -> ward = $request -> input('ward');
-        $order -> address = $request -> input('address');
-        $order -> note = $request -> input('note');
-        $order_detail = json_encode($request -> input('product_id'));
-        $order -> order_detail = $order_detail;
-        $order -> token = $token;
-        $order -> save();
-        $mailIfor = $order -> email;
-        $nameIfor = $order -> name;
-        $Mail = Mail::to($mailIfor) -> send(new TestMail($nameIfor));
-        return redirect('/order/confirm');
-    }
+    //     $token = Str::random(12);
+    //     $order = new order;
+    //     $order -> name = $request -> input('name');
+    //     $order -> phone = $request -> input('phone');
+    //     $order -> email = $request -> input('email');
+    //     $order -> city = $request -> input('city');
+    //     $order -> district = $request -> input('district');
+    //     $order -> ward = $request -> input('ward');
+    //     $order -> address = $request -> input('address');
+    //     $order -> note = $request -> input('note');
+    //     $order_detail = json_encode($request -> input('product_id'));
+    //     $order -> order_detail = $order_detail;
+    //     $order -> token = $token;
+    //     $order -> save();
+    //     $mailIfor = $order -> email;
+    //     $nameIfor = $order -> name;
+    //     $Mail = Mail::to($mailIfor) -> send(new TestMail($nameIfor));
+    //     return redirect('/order/confirm');
+    // }
     public function show_login(){
         return view('login');
     }

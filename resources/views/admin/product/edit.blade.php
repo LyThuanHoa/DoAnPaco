@@ -7,10 +7,20 @@
                                     <input type="text" value="{{$product-> name}}" name="name" placeholder="Tên sản phẩm">
                                     <input type="text" value="{{$product-> material}}" name="material" placeholder="Màu sắc">
                                 </div>
+                                <div class="select">
+                                <select id="category_id" name="category_id" required>
+                                    @foreach($categories as $category) 
+                                    <option style="color:grey" value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                    @endforeach 
+                                </select>
+                                </div>
                                 <div class="admin-content-main-content-two-input">
                                     <input type="text" value="{{$product-> price_normal}}" name="price_normal" placeholder="Giá bán">
                                     <input type="text" value="{{$product-> price_sale}}" name="price_sale" placeholder="Giá giảm">
                                 </div>
+                                
                                 <textarea class="editor1" value="" name="description" id="" placeholder="Điểm nổi bật">{{$product-> description}}</textarea>
                                 <textarea class="editor2" value="" name="content" id="" placeholder="Mô tả sản phẩm">{{$product-> content}}</textarea>
                                 <button class="main-btn" type="submit">Cập nhật Sản Phẩm</button>

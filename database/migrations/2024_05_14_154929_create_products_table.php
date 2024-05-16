@@ -15,12 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name') -> nullable();
             $table->string('material')-> nullable();
+            
             $table->string('price_normal')-> nullable();
             $table->string('price_sale')-> nullable();
             $table->longText('description')-> nullable();
             $table->longText('content')-> nullable();
             $table->string('image')-> nullable();
             $table->string('images')-> nullable();
+            $table->string('category_id')-> nullable();
             $table->timestamps();
         });
     }

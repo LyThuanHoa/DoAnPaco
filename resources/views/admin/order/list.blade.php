@@ -30,7 +30,11 @@
                                                 <a class="edit-class" href="/admin/order/detail/{{($order -> order_detail)}}">Chi tiết</a>
                                             </td>
                                             <td>{{($order -> created_at)}}</td>
-                                            <td><a class="confirm-order" href="">Chưa xác nhận</a></td>
+                                            @php
+                                                $text = ($order->status == 0) ? "Chưa xác nhận" : "Đã xác nhận";
+                                            @endphp
+
+                                            <td><a class="confirm-order" href="">{{$text}}</a></td>
                                             <td>
                                                 <a onclick="removeRow1(order_id = {{$order -> id}}, url='/admin/order/delete')" class="delete-class" href="#">Xóa</a>
                                             </td>

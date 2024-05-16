@@ -7,8 +7,16 @@
                                     <input type="text" name="name" placeholder="Tên sản phẩm">
                                     <input type="text" name="material" placeholder="Chất liệu">
                                 </div>
-                                <div class="admin-content-main-content-two-input">
-                                    <input type="text" name="name" placeholder="Danh mục">
+                                <div class="select">
+                                    <select style="color:grey" id="category_id" name="category_id" required>
+                                        <option value="" disabled selected>Chọn danh mục</option>
+                                        @foreach($categories as $category)
+                                            <option placeholder="" value="{{ $category->id }}">
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    
                                 </div>
                                 <div class="admin-content-main-content-two-input">
                                     <input type="text" name="price_normal" placeholder="Giá bán">

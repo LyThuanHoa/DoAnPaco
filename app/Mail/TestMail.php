@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use App\Models\order;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -12,13 +13,19 @@ use Illuminate\Queue\SerializesModels;
 class TestMail extends Mailable
 {
     use Queueable, SerializesModels;
+    public $nameIfor;
+    public $confirmationUrl;
 
     /**
      * Create a new message instance.
+     *
+     * @param string $nameIfor
+     * @param string $confirmationUrl
      */
-    public function __construct(public $nameIfor)
+    public function __construct($nameIfor, $confirmationUrl)
     {
-        
+        $this->nameIfor = $nameIfor;
+        $this->confirmationUrl = $confirmationUrl;
     }
 
     /**
