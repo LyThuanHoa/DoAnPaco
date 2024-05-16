@@ -13,11 +13,9 @@
                 <div class="header-nav">
                     <nav>
                         <ul>
-                            <li><a href="">SẢN PHẨM</a></li>
-                            <li><a href="">BÁT ĐĨA</a></li>
-                            <li><a href="">ẤM CHÉN</a></li>
-                            <li><a href="">LỌ HOA</a></li>
-                            <li><a href="/book/add">ĐẶT LỊCH</a></li>
+                        <li class="productMenu"><a href="/product">SẢN PHẨM</i></a>
+                        </li>
+                            <li><a href="/book/add">ĐẶT LỊCH NẶN GỐM</a></li>
                             <li><a href="/news">GIỚI THIỆU</a></li>
                         </ul>
                     </nav>
@@ -27,7 +25,8 @@
                     <img src="{{asset('frontend/asset/images/search.png')}}">
                 </div>
                 <div class="header-cart">
-                    <i number="0"><img src="{{asset('frontend/asset/images/cart.png')}}"></i>
+                    <a href="/cart"><i number="5"><img src="{{asset('frontend/asset/images/cart.png')}}"></i></a>
+                    
                 </div>
             </div>
         </div>

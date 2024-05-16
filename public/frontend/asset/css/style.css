@@ -125,6 +125,7 @@ header{
 }
 .header-search input{
     height: 30px;
+    width: 250px;
     border: 1px solid black;
     padding-left: 20px;
     border-radius: 15px;
@@ -437,8 +438,23 @@ footer .row-grid{
     margin-bottom: 10px;
 }
 
-
-
+.menu_second{
+    background-color: red;
+    width: 300px;
+    position:absolute; 
+    margin-top:25px;
+    margin-left: 0;
+}
+.flex justify-between flex-1 sm:hidden{
+    display: none;
+}
+.pagination {
+    margin-top: 15px;
+    display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử trên cùng một dòng */
+    justify-content: center; /* Canh giữa các phần tử trong phân trang */
+    align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+    
+}
 
 
 

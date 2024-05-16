@@ -26,7 +26,7 @@
                         <h1>{{$product -> name}}</h1>
                         <span>{{$product -> material}}</span>
                         <div class="hot-product-item-price">
-                            <p>{{$product -> price_normal}}<sup>đ</sup> <span>{{$product -> price_sale}}<sup>đ</sup></span></p>
+                            <p>{{$product -> price_sale}}<sup>đ</sup> <span>{{$product -> price_normal}}<sup>đ</sup></span></p>
                         </div>
                     </div>
                     <h3>Đặc điểm nổi bật</h3>

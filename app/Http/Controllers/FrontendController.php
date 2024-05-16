@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\product;
 use App\Models\order;
 use App\Models\book;
+use App\Models\category;
 use App\Models\news;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -140,4 +141,58 @@ class FrontendController extends Controller
             'news' => $news,
         ]);
     }
+    public function show_product_list(){
+        $products = product::paginate(12);
+        $categories = category::all();
+        return view('product_list',[
+            'products' => $products,
+            'categories' => $categories
+        ]);
+
+    }
+    // public function show_product_category(Request $request){
+    //     // Lấy ID của danh mục từ request
+    //     $categories = category::all();
+    //     $category_id = $request->id;
+    //     $products = product::paginate(12);
+        
+    
+    //     return view('product_category', [
+    //         //'category' => $category,
+    //         'products' => $products,
+    //         'categories' => $categories
+    //     ]);
+    // }
+    public function show_product_category($id)
+{
+    // Lấy tất cả danh mục
+    $categories = category::all();
+
+    // Lấy danh mục cụ thể theo id
+    $category = category::findOrFail($id);
+
+    $products = $category->products()->paginate(12);
+
+    // Truyền dữ liệu vào view
+    return view('product_category', [
+        'category' => $category,
+        'products' => $products,
+        'categories' => $categories
+    ]);
+}
+public function search(Request $request)
+{
+    $query = $request->input('query');
+    
+    // Tìm kiếm sản phẩm theo tên
+    $products = product::where('name', 'LIKE', "%{$query}%")->paginate(12);
+    $categories = category::all();
+
+    return view('product_list', [
+        'products' => $products,
+        'categories' => $categories
+    ]);
+}
+
+    
 }

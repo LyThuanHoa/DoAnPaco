@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\UploadController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\WarehouseController;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 use App\Models\product;
@@ -13,6 +14,7 @@ use App\Models\order;
 use App\Models\book;
 use App\Models\news;
 use App\Models\category;
+use App\Models\warehouse;
 
 //Login
 //Route::get('/login',[FrontendController::class,'show_login'])-> name('login');
@@ -66,7 +68,16 @@ Route::get('/admin/category/edit/{id}',[CategoryController::class,'edit_category
 Route::post('/admin/category/edit/{id}',[CategoryController::class,'update_category']);
 
 
-Route::get('/order/confirm/{token}', [OrderController::class, 'confirmOrder'])->name('order.success');
+Route::get('/order/confirm/{token}', [OrderController::class, 'confirmOrder'])->name('order.confirm');
+
+//warehouse
+Route::post('/admin/warehouse/add',[WarehouseController::class,'insert_warehouse']);
+Route::get('/admin/warehouse/create',[WarehouseController::class,'add_warehouse']);
+Route::get('/admin/warehouse/list',[WarehouseController::class,'list_warehouse']);
+Route::get('/admin/warehouse/delete',[WarehouseController::class,'delete_warehouse']);
+Route::get('/admin/warehouse/edit/{id}',[WarehouseController::class,'edit_warehouse']);
+Route::post('/admin/warehouse/edit/{id}',[WarehouseController::class,'update_warehouse']);
+
 
 
 //upload
@@ -91,3 +102,8 @@ Route::post('/book/send',[FrontendController::class,'send_book']);
 
 //News
 Route::get('/news',[FrontendController::class,'show_news']);
+
+//Product
+Route::get('/product',[FrontendController::class,'show_product_list']);
+Route::get('/product_list/{id}', [FrontendController::class, 'show_product_category']);
+Route::get('/product/search', [FrontendController::class, 'search'])->name('product.search');

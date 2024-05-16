@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class category extends Model
 {
     use HasFactory;
-    // public function products()
-    // {
-    //     return $this->hasMany(Product::class);
-    // }
+    public function products()
+    {
+        return $this->hasMany(product::class);
+    }
 }

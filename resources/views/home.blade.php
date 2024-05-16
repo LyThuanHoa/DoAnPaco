@@ -41,7 +41,7 @@
                         <a href="/product/{{$product -> id}}"><p>{{$product -> name}}</p></a>
                         <span>{{$product -> material}}</span>
                         <div class="hot-product-item-price">
-                            <p>{{$product -> price_normal}}<sup>đ</sup> <span>{{$product -> price_sale}}<sup>đ</sup></span></p>
+                            <p>{{$product -> price_sale}}<sup>đ</sup> <span>{{$product -> price_normal}}<sup>đ</sup></span></p>
                         </div>
                     </div>
                 @endforeach

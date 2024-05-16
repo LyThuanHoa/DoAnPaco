@@ -73,10 +73,10 @@
                         <input type="text" placeholder="Email" name="email" id="">
                     </div>
                     <div class="cart-section-right-select">
-                        <select name="city" id="city">
+                        <select name="city" id="city" onchange="getDistricts()">
                             <option value="">Tỉnh/ TP</option>
                         </select>
-                        <select name="district" id="district">
+                        <select name="district" id="district" onchange="getWards()">
                             <option value="">Quận/ Huyện</option>
                         </select>
                         <select name="ward" id="ward">
@@ -96,9 +96,94 @@
 </div>
         @csrf
 </form>
+<script>
+    // Tạo một hàm để gửi yêu cầu AJAX đến API
+    function getCities() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://vapi.vnappmob.com/api/province', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                var cities = data.results;
+
+                // Đổ dữ liệu vào danh sách thả xuống city
+                var citySelect = document.getElementById('city');
+                cities.forEach(function (city) {
+                    var option = document.createElement('option');
+                    option.text = city.province_name;
+                    option.value = city.province_id;
+                    citySelect.add(option);
+                });
+            }
+        };
+        xhr.send();
+    }
+    function getDistricts() {
+    // Lấy giá trị của tỉnh/thành phố đã chọn từ danh sách thả xuống
+    var cityId = document.getElementById('city').value;
+    
+    // Tạo một đối tượng XMLHttpRequest để gửi yêu cầu đến API
+    var xhr = new XMLHttpRequest();
+    
+    // Thiết lập phương thức và URL của yêu cầu
+    xhr.open('GET', 'https://vapi.vnappmob.com/api/province/district/' + cityId, true);
+    
+    // Xử lý phản hồi từ API khi yêu cầu hoàn thành
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Phân tích dữ liệu JSON từ phản hồi
+            var data = JSON.parse(xhr.responseText);
+            
+            // Lấy danh sách các quận/huyện từ dữ liệu
+            var districts = data.results;
+            
+            // Lấy thẻ select của quận/huyện
+            var districtSelect = document.getElementById('district');
+            
+            // Xóa tất cả các lựa chọn hiện tại trong danh sách thả xuống
+            districtSelect.innerHTML = '';
+            
+            // Duyệt qua danh sách các quận/huyện và thêm vào danh sách thả xuống
+            districts.forEach(function (district) {
+                var option = document.createElement('option');
+                option.text = district.district_name;
+                option.value = district.district_id;
+                districtSelect.add(option);
+            });
+        }
+    };
+    
+    // Gửi yêu cầu đến API
+    xhr.send();
+}
+function getWards() {
+        var districtId = document.getElementById('district').value;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://vapi.vnappmob.com/api/province/ward/' + districtId, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                var wards = data.results;
+                var wardSelect = document.getElementById('ward');
+                wardSelect.innerHTML = '';
+                wards.forEach(function (ward) {
+                    var option = document.createElement('option');
+                    option.text = ward.ward_name;
+                    option.value = ward.ward_id;
+                    wardSelect.add(option);
+                });
+            }
+        };
+        xhr.send();
+    }
+
+
+    // Gọi hàm để lấy dữ liệu cities khi trang được tải
+    window.onload = getCities;
+</script>
 </section>
 @endsection
 @section('footer')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{asset('frontend\asset\js\apiprovince.js')}}"></script>
+    
 @endsection
