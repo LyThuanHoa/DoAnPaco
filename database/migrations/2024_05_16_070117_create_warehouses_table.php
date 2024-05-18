@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('quantity_received')-> nullable();
             $table->string('quantity_sold')-> nullable();
             $table->string('inventory')-> nullable();
-            $table->string('product_id')-> nullable();
-            $table->string('order_id')-> nullable();
             $table->timestamps();
         });
     }

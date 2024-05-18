@@ -21,9 +21,13 @@
                     </nav>
                 </div>
                 <div class="header-search">
-                    <input type="text" placeholder="Tìm kiếm">
-                    <img src="{{asset('frontend/asset/images/search.png')}}">
-                </div>
+                <form action="{{ route('product.search') }}" method="GET">
+                    <input type="text" name="query" placeholder="Tìm kiếm">
+                    <button type="submit">
+                        <img src="{{ asset('frontend/asset/images/search.png') }}">
+                    </button>
+                </form>
+            </div>
                 <div class="header-cart">
                     <a href="/cart"><i number="5"><img src="{{asset('frontend/asset/images/cart.png')}}"></i></a>
                     

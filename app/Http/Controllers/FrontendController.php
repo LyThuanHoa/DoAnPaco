@@ -21,11 +21,12 @@ use function Laravel\Prompts\alert;
 class FrontendController extends Controller
 {
     public function index(){
-        $products = product::all();
-        return view('home',[
+        $products = Product::orderBy('created_at', 'desc')->paginate(8);
+        return view('home', [
             'products' => $products
         ]);
     }
+    
     public function show_product(Request $request){
         $product = product::find($request -> id);
         return view('product_detail',[
@@ -101,16 +102,16 @@ class FrontendController extends Controller
     public function show_login(){
         return view('login');
     }
-    // public function check_login(Request $request){
-    //     if(Auth::attempt(
-    //         ['email' => $request -> input('email'),
-    //         'password'=> $request -> input('password')
-    //         ]
-    //     ))
-    //         return redirect('admin');
+    public function check_login(Request $request){
+         if(Auth::attempt(
+             ['email' => $request -> input('email'),
+             'password'=> $request -> input('password')
+             ]
+         ))
+             return redirect('admin');
         
-    //         return redirect()-> back();
-    // }
+             return redirect()-> back();
+     }
     public function show_book(){
         $books = book::all();
         return view('book',[
@@ -180,19 +181,25 @@ class FrontendController extends Controller
         'categories' => $categories
     ]);
 }
-public function search(Request $request)
-{
-    $query = $request->input('query');
-    
-    // Tìm kiếm sản phẩm theo tên
-    $products = product::where('name', 'LIKE', "%{$query}%")->paginate(12);
-    $categories = category::all();
+    public function search(Request $request) {
+        $query = $request->input('query');
+        $keywords = explode(' ', $query);
 
-    return view('product_list', [
-        'products' => $products,
-        'categories' => $categories
-    ]);
-}
+        $products = product::query();
 
+        foreach ($keywords as $keyword) {
+            $products->orWhere('name', 'LIKE', "%{$keyword}%");
+        }
+
+        $products = $products->orderBy('created_at', 'desc')->paginate(12);
+
+        $noResults = $products->isEmpty();
+
+        return view('search-results', [
+            'products' => $products,
+            'query' => $query,
+            'noResults' => $noResults
+        ]);
+    }
     
 }

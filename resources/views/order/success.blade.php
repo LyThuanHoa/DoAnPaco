@@ -11,7 +11,7 @@
                     Chúng tôi sẽ <span style="font-style: italic;font-weight: bold;">Giao hàng </span>trong thời gian tối đa <span style="font-style: italic;font-weight: bold;">3 ngày </span>làm việc</p>
                 </div>
             </div>
-            <button class="main-btn">Tiếp tục mua hàng</button>
+            <a href="/"><button class="main-btn">Tiếp tục mua hàng</button></a>
         </div>
     </section>
 @endsection

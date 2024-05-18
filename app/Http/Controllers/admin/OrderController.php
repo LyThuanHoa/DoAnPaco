@@ -14,34 +14,37 @@ use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
-    public function list_order(){
-       $orders = order::all();
-        return view('admin.order.list',[
+    public function list_order()
+    {
+        $orders = order::all();
+        return view('admin.order.list', [
             'orders' => $orders,
-             'title' => 'Danh sách đơn hàng'
+            'title' => 'Danh sách đơn hàng'
         ]);
     }
-    public function detail_order(Request $request){
-        $order_detail = json_decode($request -> order_detail,true);
-        $orders = order::whereIn('id',$order_detail);
+    public function detail_order(Request $request)
+    {
+        $order_detail = json_decode($request->order_detail, true);
+        $orders = order::whereIn('id', $order_detail);
         $product_id = array_keys($order_detail);
-        $products = product::whereIn('id',$product_id) -> get();
-        return view('admin.order.detail',[
+        $products = product::whereIn('id', $product_id)->get();
+        return view('admin.order.detail', [
             'products' => $products,
             'order_detail' => $order_detail,
             'title' => 'Chi tiết đơn hàng'
         ]);
-        
     }
-    public function delete_order(Request $request){
-        order::find($request -> order_id)->delete();
-        return response() -> json([
+    public function delete_order(Request $request)
+    {
+        order::find($request->order_id)->delete();
+        return response()->json([
             'success' => true
         ]);
     }
-    public function delete_order_detail(Request $request){
-        product::find($request -> product_id)->delete();
-        return response() -> json([
+    public function delete_order_detail(Request $request)
+    {
+        product::find($request->product_id)->delete();
+        return response()->json([
             'success' => true
         ]);
     }
@@ -56,7 +59,7 @@ class OrderController extends Controller
 
         // Cập nhật trạng thái đơn hàng
         $order->status = 1;
-        $order->token = null; // Xóa token để tránh sử dụng lại
+        //$order->token = null; // Xóa token để tránh sử dụng lại
         $order->save();
 
         return redirect('/order/success')->with('success', 'Đơn hàng đã được xác nhận thành công.');
@@ -78,14 +81,13 @@ class OrderController extends Controller
         $order->token = $token;
         $order->status = 0; // Trạng thái ban đầu là chưa xác nhận
         $order->save();
-    
+
         $mailIfor = $order->email;
         $nameIfor = $order->name;
         $confirmationUrl = url('/order/confirm/' . $order->token);
-        
+
         Mail::to($mailIfor)->send(new TestMail($nameIfor, $confirmationUrl));
-    
+
         return redirect('/order/confirm');
     }
-    
 }

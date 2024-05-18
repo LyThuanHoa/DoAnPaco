@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\UploadController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\WarehouseController;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
@@ -17,19 +18,19 @@ use App\Models\category;
 use App\Models\warehouse;
 
 //Login
-//Route::get('/login',[FrontendController::class,'show_login'])-> name('login');
-//Route::post('/check_login',[ProductController::class,'check_login']);
+Route::get('/login', [FrontendController::class, 'show_login'])->name('login');
+Route::post('/check_login', [FrontendController::class, 'check_login']);
+
 //Admin
-// Route::middleware('auth') -> group(function(){
-//     Route::prefix('admin') -> group(function(){
-//         Route::get('/',function() {return view('admin.home');});
-//         Route::get('product/list',[ProductController::class,'list_product']);
-//     });
-// });
+Route::middleware('auth')->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('/', function () {
+            return view('admin.home');
+        });
+        //Route::get('product/list', [ProductController::class, 'list_product']);
+    });
+});
 
-
-
-Route::get('/admin',function() {return view('admin.home');});
 
 //Product
 Route::post('/admin/product/add',[ProductController::class,'insert_product']);
@@ -78,7 +79,8 @@ Route::get('/admin/warehouse/delete',[WarehouseController::class,'delete_warehou
 Route::get('/admin/warehouse/edit/{id}',[WarehouseController::class,'edit_warehouse']);
 Route::post('/admin/warehouse/edit/{id}',[WarehouseController::class,'update_warehouse']);
 
-
+//Dashboard
+Route::get('/admin/dashboard',[DashboardController::class,'show']);
 
 //upload
 Route::post('/upload',[UploadController::class,'uploadImage']);
@@ -106,4 +108,5 @@ Route::get('/news',[FrontendController::class,'show_news']);
 //Product
 Route::get('/product',[FrontendController::class,'show_product_list']);
 Route::get('/product_list/{id}', [FrontendController::class, 'show_product_category']);
-Route::get('/product/search', [FrontendController::class, 'search'])->name('product.search');
+//Route::get('/product/search', [FrontendController::class, 'search'])->name('product.search');
+Route::get('/search', [FrontendController::class, 'search'])->name('product.search');

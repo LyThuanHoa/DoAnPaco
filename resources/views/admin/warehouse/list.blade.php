@@ -15,27 +15,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($warehouses as $warehouse)
-                                        <tr>
-                                        <td>{{$warehouse -> id}}</td>
-                                        <td>{{$warehouse -> name}}</td>
-                                        @foreach($products as $product)
-                                            @if($warehouse->product_id == $product -> id)
-                                                <td>{{$product -> name}}</td>
-                                                <td><img style="width: 90px;" src="{{asset($product -> image)}}" alt=""></td>
-                                            @endif
-                                        @endforeach
-                                        <td>{{$warehouse ->quantity_received}}</td>
-                                        <td>{{$warehouse ->quantity_sold}}</td>
-                                        <td>{{$warehouse ->inventory}}</td>
-                                        <td>
-                                            <a href="/admin/warehouse/edit/{{$warehouse -> id}}" class="edit-class">Sửa</a>
-                                            |
-                                            <a  class="delete-class" onclick="removeRow(warehouse_id = {{$warehouse -> id}},url='/admin/warehouse/delete')">Xóa</a>
-                                        </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
+            @foreach($warehouses as $warehouse)
+                <tr>
+                    <td>{{ $warehouse->id }}</td>
+                    <td>{{ $warehouse->name }}</td>
+                    @foreach($products as $product)
+                        @if($warehouse->product_id == $product->id)
+                            <td>{{ $product->name }}</td>
+                            <td><img style="width: 90px;" src="{{ asset($product->image) }}" alt="{{ $product->name }}"></td>
+                        @endif
+                    @endforeach
+                    <td>{{ $warehouse->quantity_received }}</td>
+                    <td>{{ $soldQuantities[$warehouse->product_id] ?? 0 }}</td>
+                    <td>{{ $warehouse->quantity_received - ($soldQuantities[$warehouse->product_id] ?? 0) }}</td>
+                    <td>
+                        <a href="/admin/warehouse/edit/{{ $warehouse->id }}" class="edit-class">Sửa</a>
+                        |
+                        <a class="delete-class" onclick="removeRow({{ $warehouse->id }}, '/admin/warehouse/delete')">Xóa</a>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
                             </table>
                         </div>
 

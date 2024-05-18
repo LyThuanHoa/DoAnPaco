@@ -7,7 +7,7 @@
                         <li><a href=""><i class="ri-dashboard-line"></i> Dashboard</a>
                             <ul class="sub-menu">
                                 <div class="sub-menu-item">
-                                    <li><a href="/admin"><i class="ri-arrow-drop-right-line"></i>Tổng quan</a></li>
+                                    <li><a href="/admin/dashboard"><i class="ri-arrow-drop-right-line"></i>Tổng quan</a></li>
                                 </div>
                             </ul>
                             </li>
@@ -33,7 +33,7 @@
                                 </div>
                             </ul>
                         </li>
-                        <li><a href=""><i class="ri-calendar-check-line"></i>Tin tức</a>
+                        <li><a href=""><i class="ri-news-line"></i>Tin tức</a>
                             <ul class="sub-menu">
                                 <div class="sub-menu-item">
                                     <li><a href="/admin/news/list"><i class="ri-arrow-drop-right-line"></i>Danh sách</a></li>
@@ -41,7 +41,7 @@
                                 </div>
                             </ul>
                         </li>
-                        <li><a href=""><i class="ri-calendar-check-line"></i>Danh mục</a>
+                        <li><a href=""><i class="ri-menu-search-line"></i>Danh mục</a>
                             <ul class="sub-menu">
                                 <div class="sub-menu-item">
                                     <li><a href="/admin/category/list"><i class="ri-arrow-drop-right-line"></i>Danh sách</a></li>
@@ -49,11 +49,19 @@
                                 </div>
                             </ul>
                         </li>
-                        <li><a href=""><i class="ri-file-list-3-line"></i> Kho hàng</i></a>
+                        <li><a href=""><i class="ri-home-3-line"></i> Kho hàng</i></a>
                             <ul class="sub-menu">
                                 <div class="sub-menu-item">
                                     <li><a href="/admin/warehouse/list"><i class="ri-arrow-drop-right-line"></i>Danh sách</a></li>
                                     <li><a href="/admin/warehouse/create"><i class="ri-arrow-drop-right-line"></i>Thêm</a></li>
+                                </div>
+                            </ul>
+                        </li>
+                        <li><a href=""><i class="ri-id-card-line"></i> Phân quyền người dùng</i></a>
+                            <ul class="sub-menu">
+                                <div class="sub-menu-item">
+                                    <li><a href=""><i class="ri-arrow-drop-right-line"></i>Danh sách</a></li>
+                                    <li><a href=""><i class="ri-arrow-drop-right-line"></i>Thêm</a></li>
                                 </div>
                             </ul>
                         </li>

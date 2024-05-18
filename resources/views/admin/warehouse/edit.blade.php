@@ -22,7 +22,7 @@
                                 <div class="input-admin">
                                     <input type="text" name="quantity_received" placeholder="Số lượng nhập" value="{{$warehouse -> quantity_received}}">
                                 </div>
-                                <button style="margin-left: 20px;" class="main-btn" type="submit">Thêm </button>
+                                <button style="margin-left: 20px;" class="main-btn" type="submit">Cập nhật </button>
 @csrf
                             </div>
                                 

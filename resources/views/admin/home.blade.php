@@ -35,7 +35,7 @@
                 </div>
                 <div class="admin-content-main">
                     <div class="admin-content-main-title">
-                        <h2>Dashboard</h2>
+                        
                     </div>
                 </div>
             </div>

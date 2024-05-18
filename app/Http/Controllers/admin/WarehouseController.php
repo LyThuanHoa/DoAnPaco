@@ -29,17 +29,70 @@ class WarehouseController extends Controller
         $warehouse -> save();
         return redirect() -> back();
     }
-    public function list_warehouse(){
-        $products = product::all();
+    // public function list_warehouse(){
+    //     $products = product::all();
+    //     $orders = order::all();
+    //     $warehouses = DB::table('warehouses')->paginate(10);
+    //     $soldQuantities = [];
+    //     foreach ($orders as $item) {
+    //         // Kiểm tra xem sản phẩm đã tồn tại trong mảng $soldQuantities chưa
+    //         if (array_key_exists($item->product_id, $soldQuantities)) {
+    //             // Nếu đã tồn tại, cộng số lượng đã bán của sản phẩm đó
+    //             $soldQuantities[$item->product_id] += $item->quantity;
+    //         } else {
+    //             // Nếu chưa tồn tại, thêm sản phẩm vào mảng với số lượng đã bán là số lượng của mục đơn hàng
+    //             $soldQuantities[$item->product_id] = $item->quantity;
+    //         }
+    //     }
+    //     return view('admin.warehouse.list',[
+    //         'title' => 'Danh sách sản phẩm trong kho',
+    //         'warehouses' => $warehouses,
+    //         'products' => $products,
+    //         'orders' => $orders
+    //     ]);
+    // }
+    public function list_warehouse()
+    {
+        // Truy vấn tất cả các đơn hàng
         $orders = order::all();
-        $warehouses = DB::table('warehouses')->paginate(10);
-        return view('admin.warehouse.list',[
-            'title' => 'Danh sách sản phẩm trong kho',
-            'warehouses' => $warehouses,
+
+        // Khởi tạo mảng để lưu trữ tổng số lượng bán của mỗi sản phẩm
+        $soldQuantities = [];
+
+        // Duyệt qua tất cả các đơn hàng
+        foreach ($orders as $order) {
+            // Giải mã chuỗi JSON từ trường order_detail
+            $orderDetails = json_decode($order->order_detail, true);
+
+            // Duyệt qua các sản phẩm trong order_detail
+            foreach ($orderDetails as $productId => $quantity) {
+                // Nếu sản phẩm đã tồn tại trong mảng $soldQuantities, tăng số lượng
+                if (isset($soldQuantities[$productId])) {
+                    $soldQuantities[$productId] += $quantity;
+                } else {
+                    // Nếu chưa tồn tại, khởi tạo với số lượng hiện tại
+                    $soldQuantities[$productId] = $quantity;
+                }
+            }
+        }
+
+        // Lấy thông tin chi tiết của các sản phẩm
+        $products = product::all();
+        
+        // Lấy thông tin kho hàng (giả sử bạn có model Warehouse)
+        $warehouses = warehouse::all();
+
+        // Truyền dữ liệu tới view
+        return view('admin.warehouse.list', [
             'products' => $products,
-            'orders' => $orders
+            'warehouses' => $warehouses,
+            'soldQuantities' => $soldQuantities,
+            'title' => 'Danh sách sản phẩm trong kho'
         ]);
     }
+
+
+
     public function delete_warehouse(Request $request){
         warehouse::find($request -> warehouse_id)->delete();
         return response() -> json([
