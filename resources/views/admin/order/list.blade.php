@@ -24,10 +24,11 @@
                                             <td>{{($order -> name)}}</td>
                                             <td>{{($order -> phone)}}</td>
                                             <td>{{($order -> email)}}</td>
-                                            <td>{{($order -> address)}},{{($order -> ward)}},{{($order -> district)}},{{($order -> city)}}</td>
+                                            <td>{{($order -> address)}}</td>
                                             <td>{{($order -> note)}}</td>
                                             <td>
-                                                <a class="edit-class" href="/admin/order/detail/{{($order -> order_detail)}}">Chi tiết</a>
+                                            <a class="edit-class" href="/admin/order/detail/{{ $order->id }}/{{ $order->order_detail }}">Chi tiết</a>
+
                                             </td>
                                             <td>{{($order -> created_at)}}</td>
                                             @php
@@ -43,6 +44,9 @@
 
                                 </tbody>
                             </table>
+                            <div class="pagination" style="display: flex; justify-content: center;">
+    {{ $orders->links() }}
+</div>
                         </div>
 <script>
     //Delete

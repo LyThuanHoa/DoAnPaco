@@ -57,12 +57,5 @@
                                 </div>
                             </ul>
                         </li>
-                        <li><a href=""><i class="ri-id-card-line"></i> Phân quyền người dùng</i></a>
-                            <ul class="sub-menu">
-                                <div class="sub-menu-item">
-                                    <li><a href=""><i class="ri-arrow-drop-right-line"></i>Danh sách</a></li>
-                                    <li><a href=""><i class="ri-arrow-drop-right-line"></i>Thêm</a></li>
-                                </div>
-                            </ul>
-                        </li>
+                        
 </div>

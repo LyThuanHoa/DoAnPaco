@@ -31,6 +31,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div class="pagination" style="display: flex; justify-content: center;">
+    {{ $products->links() }}
+</div>
                         </div>
 
 <script>

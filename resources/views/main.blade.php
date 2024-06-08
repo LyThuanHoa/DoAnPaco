@@ -14,7 +14,7 @@
     <section class="hot-products">
         <div class="container">
             <div class="row-grid">
-                <p class="heading-text">Sản Phẩm Phổ Biến</p>
+                <p class="heading-text">Sản Phẩm Mới Nhất</p>
                 <br/>
             </div>
             <div class="row-grid row-grid-hot-products">

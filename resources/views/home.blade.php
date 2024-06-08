@@ -38,36 +38,48 @@
                         <a href="/product/{{$product -> id}}"><p>{{$product -> name}}</p></a>
                         <span>{{$product -> material}}</span>
                         <div class="hot-product-item-price">
-                            <p>{{$product -> price_sale}}<sup>đ</sup> <span>{{$product -> price_normal}}<sup>đ</sup></span></p>
+                            <p>{{number_format($product -> price_sale)}}<sup>đ</sup> <span>{{number_format($product -> price_normal)}}<sup>đ</sup></span></p>
+                        <br/>
                         </div>
                     </div>
                 @endforeach
-                
             </div>
-        </div>
+            <div class="btnXemThem"><a href="/product">>> Xem thêm</a></div>
+            <!-- <div class="pagination" style="color: white; background-color: brown; width: fit-content; padding-left: 15px; 
+            padding-right: 15px; text-align: center; margin: 0 auto; border-radius: 5px; font-size: large; display: flex; 
+            justify-content: center; align-items: center;padding-bottom: 15px">
+    {{ $products->links() }}
+</div> -->
+            </div>
 </section>
     <br/>
     <!---------San Pham Pho Bien------------->
     <section class="hot-products">
 <div class="container">
             <div class="row-grid">
-                <p class="heading-text">Sản Phẩm Phổ Biến</p>
+                <p class="heading-text">Sản Phẩm Cao cấp</p>
                 <br/>
             </div>
             <div class="row-grid row-grid-hot-products">
-                @foreach($products as $product)
+                @foreach($allProducts as $allProduct)
                     <div class="hot-product-item">
-                        <a href="/product/{{$product -> id}}"><img src="{{asset($product -> image)}}" alt=""></a>
-                        <a href="/product/{{$product -> id}}"><p>{{$product -> name}}</p></a>
-                        <span>{{$product -> material}}</span>
+                        <a href="/product/{{$allProduct -> id}}"><img src="{{asset($allProduct -> image)}}" alt=""></a>
+                        <a href="/product/{{$allProduct -> id}}"><p>{{$allProduct -> name}}</p></a>
+                        <span>{{$allProduct -> material}}</span>
                         <div class="hot-product-item-price">
-                            <p>{{$product -> price_sale}}<sup>đ</sup> <span>{{$product -> price_normal}}<sup>đ</sup></span></p>
+                            <p>{{number_format($allProduct -> price_sale)}}<sup>đ</sup> <span>{{number_format($allProduct -> price_normal)}}<sup>đ</sup></span></p>
+                            <br/>
                         </div>
                         
                     </div>
                 @endforeach
-                
             </div>
+            <div class="btnXemThem"><a href="/product">>> Xem thêm</a></div>
+            <!-- <div class="pagination" style="color: white; background-color: brown; width: fit-content; padding-left: 15px; 
+            padding-right: 15px; text-align: center; margin: 0 auto; border-radius: 5px; font-size: large; display: flex; 
+            justify-content: center; align-items: center;padding-bottom: 15px">
+    {{ $allProducts->links() }}
+</div> -->
         </div>
 </section>
         @include('parts.footer')

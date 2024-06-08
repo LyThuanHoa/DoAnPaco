@@ -39,6 +39,20 @@ li{
     border: none;
     border-radius: 5px;
 }
+.pagination ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination li {
+    margin-right: 10px; /* Adjust spacing as needed */
+}
+
+.pagination li:last-child {
+    margin-right: 0;
+}
 /*----Main----*/
 .admin .row-grid {
     grid-template-columns: 20% 80%;
@@ -49,7 +63,7 @@ li{
 
 /*----sidebar----*/
 .admin-sidebar{
-    height: 100vh;
+    height: 100vw;
     background-color: var(--main-bg-color);
 }
 .admin-sidebar-top{
@@ -342,3 +356,71 @@ li{
 .ck.ck-editor__main li{
     list-style: unset;
 }
+
+.order_detail_in4 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.order_detail_in4 > div {
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.order_detail_in4_title {
+    width: 130px;
+    margin: 0;
+    padding: 0;
+}
+.order_detail_in4_main {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.order_detail_in4_title p, .order_detail_in4_main p {
+    margin: 0;
+    padding: 5px 0;
+}
+
+.order_detail_in4_title p {
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .order_detail_in4 {
+        flex-direction: column;
+    }
+
+    .order_detail_in4 > div {
+        width: 100%;
+        padding: 10px 0;
+    }
+}
+.table-wrapper {
+    max-height: 520px; /* Điều chỉnh chiều cao phù hợp với thiết kế của bạn */
+    overflow-y: auto;
+    position: relative;
+}
+
+.table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-wrapper thead {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.table-wrapper th, .table-wrapper td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+

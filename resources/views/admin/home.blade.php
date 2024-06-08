@@ -23,9 +23,14 @@
                         <p class="hiAdmin">Hi Admin chúc bạn một ngày làm việc vui vẻ!</p>
                     </div>
                     <div class="admin-content-top-right">
+                        
                         <ul class="flex-box">
                             <li><i class="ri-notification-line" number="2"></i></li>
                             <li><i class="ri-chat-3-line" number="4"></i></li>
+                            <li><form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" style="border: none;background: none;cursor: pointer; outline: none; "><i class="ri-logout-box-r-line"></i></button>
+                                </form></li>
                             <li class="flex-box" style="margin-left: 10px;">
                                 <img style="width: 45px;" src="{{asset('backend/asset/images/logoPaco.png')}}" alt="">
                                 <p>PACO<i class="ri-arrow-drop-down-fill"></i></p>

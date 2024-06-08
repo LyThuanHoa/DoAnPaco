@@ -8,4 +8,5 @@
     <script type="text/javascript" src="{{asset('backend\asset\js\product_ajax.js')}}"></script>
     <link rel="stylesheet" href="{{asset('backend\asset\css\style.css')}}">
     <link rel="stylesheet" href="{{asset('backend\asset\ckeditor5\styles.css')}}">
+    
     <title>PACO-Admin</title>

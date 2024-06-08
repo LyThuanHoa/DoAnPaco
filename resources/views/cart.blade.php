@@ -64,6 +64,15 @@
                     </div>
                 </div>
                 <div class="cart-section-right">
+                @if ($errors->any())
+                    <div class="error-summary" style="color: red; margin-bottom: 20px; position:absolute; right:10px; top: 60px">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                     <h2 class="main-h2">Thông tin giao hàng</h2>
                     <div class="cart-section-right-input-name-phone">
                         <input type="text" placeholder="Tên" name="name" id="">

@@ -20,6 +20,7 @@ use App\Models\warehouse;
 //Login
 Route::get('/login', [FrontendController::class, 'show_login'])->name('login');
 Route::post('/check_login', [FrontendController::class, 'check_login']);
+Route::post('/logout', [FrontendController::class, 'logout'])->name('logout');
 
 //Admin
 Route::middleware('auth')->group(function () {
@@ -27,7 +28,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/', function () {
             return view('admin.home');
         });
-        //Route::get('product/list', [ProductController::class, 'list_product']);
+        Route::get('product/list', [ProductController::class, 'list_product']);
+        Route::get('order/list',[OrderController::class,'list_order']);
+        Route::get('book/list',[BookController::class,'list_book']);
+        Route::get('news/list',[NewsController::class,'list_news']);
+        Route::get('category/list',[CategoryController::class,'list_category']);
+
     });
 });
 
@@ -35,19 +41,18 @@ Route::middleware('auth')->group(function () {
 //Product
 Route::post('/admin/product/add',[ProductController::class,'insert_product']);
 Route::get('/admin/product/create',[ProductController::class,'add_product']);
-Route::get('/admin/product/list',[ProductController::class,'list_product']); 
 Route::get('/admin/product/delete',[ProductController::class,'delete_product']);
 Route::get('/admin/product/edit/{id}',[ProductController::class,'edit_product']);
 Route::post('/admin/product/edit/{id}',[ProductController::class,'update_product']);
 
 //order 
-Route::get('/admin/order/list',[OrderController::class,'list_order']);
-Route::get('/admin/order/detail/{order_detail}',[OrderController::class,'detail_order']);
+
+Route::get('/admin/order/detail/{order_id}/{order_detail}', [OrderController::class, 'detail_order']);
 Route::get('/admin/order/delete',[OrderController::class,'delete_order']);
-Route::get('/admin/order/detail/delete/{id}',[OrderController::class,'delete_order_detail']);
+Route::get('/admin/order/invoice/{order_id}',[OrderController::class,'print_order']);
 
 //book
-Route::get('/admin/book/list',[BookController::class,'list_book']);
+
 Route::get('/admin/book/delete',[BookController::class,'delete_book']);
 Route::get('/admin/book/edit/{id}',[BookController::class,'edit_book']);
 Route::post('/admin/book/edit/{id}',[BookController::class,'update_book']);
@@ -55,7 +60,7 @@ Route::post('/admin/book/edit/{id}',[BookController::class,'update_book']);
 //news
 Route::post('/admin/news/add',[NewsController::class,'insert_news']);
 Route::get('/admin/news/create',[NewsController::class,'add_news']);
-Route::get('/admin/news/list',[NewsController::class,'list_news']);
+
 Route::get('/admin/news/delete',[NewsController::class,'delete_news']);
 Route::get('/admin/news/edit/{id}',[NewsController::class,'edit_news']);
 Route::post('/admin/news/edit/{id}',[NewsController::class,'update_news']);
@@ -63,7 +68,7 @@ Route::post('/admin/news/edit/{id}',[NewsController::class,'update_news']);
 //category
 Route::post('/admin/category/add',[CategoryController::class,'insert_category']);
 Route::get('/admin/category/create',[CategoryController::class,'add_category']);
-Route::get('/admin/category/list',[CategoryController::class,'list_category']);
+
 Route::get('/admin/category/delete',[CategoryController::class,'delete_category']);
 Route::get('/admin/category/edit/{id}',[CategoryController::class,'edit_category']);
 Route::post('/admin/category/edit/{id}',[CategoryController::class,'update_category']);
@@ -74,7 +79,7 @@ Route::get('/order/confirm/{token}', [OrderController::class, 'confirmOrder'])->
 //warehouse
 Route::post('/admin/warehouse/add',[WarehouseController::class,'insert_warehouse']);
 Route::get('/admin/warehouse/create',[WarehouseController::class,'add_warehouse']);
-Route::get('/admin/warehouse/list',[WarehouseController::class,'list_warehouse']);
+Route::get('/admin/warehouse/list', [WarehouseController::class, 'list_warehouse'])->name('admin.warehouse.list');
 Route::get('/admin/warehouse/delete',[WarehouseController::class,'delete_warehouse']);
 Route::get('/admin/warehouse/edit/{id}',[WarehouseController::class,'edit_warehouse']);
 Route::post('/admin/warehouse/edit/{id}',[WarehouseController::class,'update_warehouse']);
@@ -97,6 +102,8 @@ Route::get('/cart',[FrontendController::class,'show_cart']);
 Route::get('/cart/delete/{id}',[FrontendController::class,'delete_cart']);
 Route::post('/cart/update',[FrontendController::class,'update_cart']);
 Route::post('/cart/send',[OrderController::class,'send_cart']);
+Route::get('/cart/count', [FrontendController::class,'getCartCount']);
+
 //Book
 Route::get('/book/add',[FrontendController::class,'show_book']);
 Route::get('/book/success',[FrontendController::class,'success_book']);
@@ -104,7 +111,7 @@ Route::post('/book/send',[FrontendController::class,'send_book']);
 
 //News
 Route::get('/news',[FrontendController::class,'show_news']);
-
+Route::get('/news/{id}', [FrontendController::class, 'show'])->name('news.show');
 //Product
 Route::get('/product',[FrontendController::class,'show_product_list']);
 Route::get('/product_list/{id}', [FrontendController::class, 'show_product_category']);

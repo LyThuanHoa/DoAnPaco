@@ -19,51 +19,54 @@ class WarehouseController extends Controller
         ]);
     }
 
-    public function insert_warehouse(Request $request){
+    // public function insert_warehouse(Request $request){
         
-        $warehouse = new warehouse();
-        $warehouse -> name = $request -> input('name');
-        $warehouse -> description = $request -> input('description');
-        $warehouse->product_id = $request->input('product_id');
-        $warehouse -> quantity_received = $request -> input('quantity_received');
-        $warehouse -> save();
-        return redirect() -> back();
-    }
-    // public function list_warehouse(){
-    //     $products = product::all();
-    //     $orders = order::all();
-    //     $warehouses = DB::table('warehouses')->paginate(10);
-    //     $soldQuantities = [];
-    //     foreach ($orders as $item) {
-    //         // Kiểm tra xem sản phẩm đã tồn tại trong mảng $soldQuantities chưa
-    //         if (array_key_exists($item->product_id, $soldQuantities)) {
-    //             // Nếu đã tồn tại, cộng số lượng đã bán của sản phẩm đó
-    //             $soldQuantities[$item->product_id] += $item->quantity;
-    //         } else {
-    //             // Nếu chưa tồn tại, thêm sản phẩm vào mảng với số lượng đã bán là số lượng của mục đơn hàng
-    //             $soldQuantities[$item->product_id] = $item->quantity;
-    //         }
-    //     }
-    //     return view('admin.warehouse.list',[
-    //         'title' => 'Danh sách sản phẩm trong kho',
-    //         'warehouses' => $warehouses,
-    //         'products' => $products,
-    //         'orders' => $orders
-    //     ]);
+    //     $warehouse = new warehouse();
+    //     $warehouse -> name = $request -> input('name');
+    //     $warehouse -> description = $request -> input('description');
+    //     $warehouse->product_id = $request->input('product_id');
+    //     $warehouse -> quantity_received = $request -> input('quantity_received');
+    //     $warehouse -> save();
+    //     return redirect() -> back();
     // }
-    public function list_warehouse()
+    public function insert_warehouse(Request $request)
+    {
+        $product_id = $request->input('product_id');
+        $quantity_received = $request->input('quantity_received');
+        
+        // Kiểm tra xem sản phẩm đã có trong bảng warehouses chưa
+        $existingWarehouse = Warehouse::where('product_id', $product_id)->first();
+        
+        if ($existingWarehouse) {
+            // Nếu sản phẩm đã tồn tại, cập nhật số lượng nhận
+            $existingWarehouse->quantity_received += $quantity_received;
+            $existingWarehouse->description = $request->input('description');
+            $existingWarehouse->save();
+        } else {
+            // Nếu sản phẩm chưa tồn tại, thêm mới vào bảng warehouses
+            $warehouse = new Warehouse();
+            $warehouse->name = $request->input('name');
+            $warehouse->description = $request->input('description');
+            $warehouse->product_id = $product_id;
+            $warehouse->quantity_received = $quantity_received;
+            $warehouse->save();
+        }
+
+        return redirect()->back()->with('success', 'Product added/updated successfully.');
+    }
+    public function list_warehouse(Request $request)
     {
         // Truy vấn tất cả các đơn hàng
-        $orders = order::all();
-
+        $orders = Order::all();
+        
         // Khởi tạo mảng để lưu trữ tổng số lượng bán của mỗi sản phẩm
         $soldQuantities = [];
-
+        
         // Duyệt qua tất cả các đơn hàng
         foreach ($orders as $order) {
             // Giải mã chuỗi JSON từ trường order_detail
             $orderDetails = json_decode($order->order_detail, true);
-
+        
             // Duyệt qua các sản phẩm trong order_detail
             foreach ($orderDetails as $productId => $quantity) {
                 // Nếu sản phẩm đã tồn tại trong mảng $soldQuantities, tăng số lượng
@@ -75,23 +78,51 @@ class WarehouseController extends Controller
                 }
             }
         }
-
-        // Lấy thông tin chi tiết của các sản phẩm
-        $products = product::all();
         
-        // Lấy thông tin kho hàng (giả sử bạn có model Warehouse)
-        $warehouses = warehouse::all();
-
-        // Truyền dữ liệu tới view
+        // Cập nhật thông tin số lượng bán và inventory vào kho
+        $warehouses = Warehouse::all(); // Lấy tất cả kho hàng
+    
+        foreach ($warehouses as $warehouse) {
+            $productId = $warehouse->product_id;
+            // Kiểm tra xem sản phẩm có trong danh sách $soldQuantities hay không
+            if (isset($soldQuantities[$productId])) {
+                $quantitySold = $soldQuantities[$productId];
+                $warehouse->quantity_sold = $quantitySold;
+                // Tính toán inventory
+                $warehouse->inventory = $warehouse->quantity_received - $quantitySold;
+            } else {
+                // Nếu sản phẩm chưa bán thì số lượng tồn bằng số lượng nhập
+                $warehouse->quantity_sold = 0;
+                $warehouse->inventory = $warehouse->quantity_received;
+            }
+    
+            // Lưu thông tin vào cơ sở dữ liệu
+            $warehouse->save();
+        }
+    
+        // Xử lý tìm kiếm theo tên sản phẩm
+        $search = $request->input('search');
+        if ($search) {
+            $products = Product::where('name', 'like', '%' . $search . '%')->get();
+            $productIds = $products->pluck('id')->toArray();
+            $warehouses = Warehouse::whereIn('product_id', $productIds)->get();
+        } else {
+            // Truy vấn tất cả kho hàng
+            $warehouses = Warehouse::all();
+        }
+    
+        // Truy vấn tất cả các sản phẩm để lấy số lượng tồn kho ban đầu
+        $products = Product::all();
+        
         return view('admin.warehouse.list', [
-            'products' => $products,
             'warehouses' => $warehouses,
+            'products' => $products,
             'soldQuantities' => $soldQuantities,
-            'title' => 'Danh sách sản phẩm trong kho'
+            'search' => $search,
         ]);
     }
-
-
+    
+    
 
     public function delete_warehouse(Request $request){
         warehouse::find($request -> warehouse_id)->delete();

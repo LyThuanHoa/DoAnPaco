@@ -12,7 +12,7 @@ class CategoryController extends Controller
     public function list_category(){
         $categories = category::all();
         return view('admin.category.list',[
-            'title' => 'Danh sách tin tức',
+            'title' => 'Danh sách danh mục',
             'categories' => $categories
         ]);
     }
@@ -45,8 +45,8 @@ class CategoryController extends Controller
 
     public function update_category(Request $request){
         $category = category::find($request -> id);
-        $category -> title = $request -> input('name');
-        $category -> avatar = $request -> input('description');
+        $category -> name = $request -> input('name');
+        $category -> description = $request -> input('description');
         $category -> save();
         return redirect('/admin/category/list');
     }

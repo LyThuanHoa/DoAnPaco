@@ -10,7 +10,7 @@
         <div class="row-grid row-grid-hot-products">
             
         @if ($noResults)
-            <div class="alert alert-warning" role="alert">
+            <div class="alert alert-warning" style="width:700px" role="alert">
                 Không tìm thấy sản phẩm "{{ $query }}".
             </div>
         @else

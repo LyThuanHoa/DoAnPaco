@@ -525,7 +525,21 @@ footer .row-grid{
     }
 
 
+/* phan trang  */
+.pagination ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
+.pagination li {
+    margin-right: 10px; /* Adjust spacing as needed */
+}
+
+.pagination li:last-child {
+    margin-right: 0;
+}
 
     /*---Footer--*/
     footer .row-grid{
@@ -534,4 +548,23 @@ footer .row-grid{
     }
 }
 
+.error-summary {
+    background-color: #f58f1b9e;
+    border: 1px solid #f5c6cb;
+    color: red;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 12px;
+}
 
+.btnXemThem{
+    text-align:right;
+    font-style: italic;
+    font-size: smaller;
+    font-weight: 500;
+}
+.new_main{
+    width: 1000px;
+    margin: 0 auto;
+}
